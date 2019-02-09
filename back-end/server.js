@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import Issue from './models/Issue';
 
 const app = express();
-const router = express.Router;
+const router = express.Router();
 
 //Attach middleware to Server
 //CORS = cross origin resource sharing
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 //TODO: Add DB connection URL
 
 //Mongoose connection to mongoDB
-mongoose.connect('');
+mongoose.connect('mongodb://localhost:27017/issues', {useNewUrlParser : true});
 const connection = mongoose.connection;
 
 //Listener even for opened connection
@@ -49,7 +49,7 @@ router.route('/issues/:id').get((req, res) => {
   });
 });
 
-router.router('/issues/add').post((req, res) => {
+router.route('/issues/add').post((req, res) => {
   let issue = new Issue(req.body);
   issue.save()
     .then(issue => {
@@ -62,7 +62,7 @@ router.router('/issues/add').post((req, res) => {
 
 //Endpoint for updating issue
 router.route('/issues/update/:id').post((req, res) => {
-  Issue.findById(req.params.id, (err, issues) => {
+  Issue.findById(req.params.id, (err, issue) => {
       if(!issue)
         return next(new Error('could not load initial Issue'));
       else
@@ -83,7 +83,7 @@ router.route('/issues/update/:id').post((req, res) => {
 
 //Endpoint for deleteing issue
 router.route('/issues/delete/:id').get((req, res) => {
-  Issue.findByIdAndRemove({_id: req.params.id}, (err, Issue) => {
+  Issue.findByIdAndRemove({_id: req.params.id}, (err, issue) => {
     if(err)
       res.json(err);
     else

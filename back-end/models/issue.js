@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 
 let issue = new Schema({
 
-
   title:{             //Attribute name
     type: String      //Attribute type
   },
@@ -20,9 +19,9 @@ let issue = new Schema({
     type: String
   },
   status: {
-    type: String
+    type: String,
     default: 'Open' //Default value
   }
 });
 
-export default mongoose.model('Issue', Issue);
+export default mongoose.model('Issue', issue);
