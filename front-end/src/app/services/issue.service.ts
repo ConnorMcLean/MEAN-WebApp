@@ -10,11 +10,12 @@ export class IssueService {
   constructor(private client: HttpClient) { }
 
   getIssues() {
-    return this.client.get('${this.uri}/issues');
+    // console.log('GetIssues func')
+    return this.client.get(this.uri + '/issues');
   }
 
   getIssueById(id){
-    return this.client.get('${this.uri}/issues/${id}');
+    return this.client.get(this.uri +  '/issues/${id}');
   }
 
   addIssue(title, responsible, description, severity){
@@ -24,7 +25,7 @@ export class IssueService {
         description: description,
         severity: severity
       };
-      return this.client.post('${this.uri}/issues/add', issue);
+      return this.client.post(this.uri + '/issues/add', issue);
   }
 
   updateIssue(id, title, responsible, description, severity, status){
@@ -35,11 +36,11 @@ export class IssueService {
       severity: severity,
       status: status
     };
-      return this.client.post('${this.uri}/issues/update/${id}', issue);
+      return this.client.post(this.uri + '/issues/update/' + id, issue);
   }
 
   deleteIssue(id){
-    return this.client.get('${this.uri}/issues/delete/${id}');
+    return this.client.get(this.uri + '/issues/delete/' + id);
   }
 
 }
