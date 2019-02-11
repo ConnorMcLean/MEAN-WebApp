@@ -23,9 +23,11 @@ export class ListComponent implements OnInit {
     this.fetchIssues();
   }
 
+  // fetch all issues in database
   fetchIssues() {
     console.log('Pinging server')
     this.issueService.getIssues().subscribe(
+      //read fetched issues into data array
       (data: Issue[]) => {
         this.issues = data;
         console.log ('Data Requested');
@@ -37,6 +39,7 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/edit/' + id]);
   }
 
+  // reload all issues post issue deletion to reflect current state
   deleteIssue(id){
     this.issueService.deleteIssue(id).subscribe(() =>{
       this.fetchIssues();

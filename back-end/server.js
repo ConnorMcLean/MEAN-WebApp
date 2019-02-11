@@ -1,3 +1,4 @@
+//Import relevant libraries
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -12,6 +13,11 @@ const router = express.Router();
 //Attach middleware to Server
 //CORS = cross origin resource sharing
 //Body parser because we pass json files between server and client using express
+
+//Mongoose is a node package that enables easier connection to a mongoDB
+//Database. Allows for a straight forward schema based management.
+//Essentially ORM for MongoDB, since we're using a RESTful based API
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,6 +37,13 @@ connection.once('open', () => {       //Arrow denotes function, left is paramete
 
 //Endpoint for issues
 router.route('/issues').get((req, res) => {
+
+//Fat arrow syntax denots an anonymous function in the form of
+// (Parameters) => {actions}
+//Can be nested inside function parameters
+//ECSMAscript6
+
+//find the issue in response body if there is no error return
   Issue.find((err, issues) => {
     if(err)
       console.log(err);
@@ -49,6 +62,7 @@ router.route('/issues/:id').get((req, res) => {
   });
 });
 
+//Endpoint for adding an issue to db
 router.route('/issues/add').post((req, res) => {
   let issue = new Issue(req.body);
   issue.save()
@@ -66,12 +80,15 @@ router.route('/issues/update/:id').post((req, res) => {
       if(!issue)
         return next(new Error('could not load initial Issue'));
       else
+
+      //Fill issue object with request attributes
+      //fill existing issue with new attributes basically
+
         issue.title = req.body.title;
         issue.responsible = req.body.responsible;
         issue.description = req.body.description;
         issue.severity = req.body.severity;
         issue.status = req.body.status;
-
         issue.save()
           .then(issue => {
             res.json('Successfully updated Issue');
@@ -83,6 +100,7 @@ router.route('/issues/update/:id').post((req, res) => {
 
 //Endpoint for deleteing issue
 router.route('/issues/delete/:id').get((req, res) => {
+  //auto generated ID in mongoose/mongoDB uses _id notations
   Issue.findByIdAndRemove({_id: req.params.id}, (err, issue) => {
     if(err)
       res.json(err);

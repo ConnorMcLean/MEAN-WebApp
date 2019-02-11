@@ -30,9 +30,11 @@ import {IssueService } from './services/issue.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
+    AppRoutingModule,     //Auto-generated routing import from app-routing.module.ts
+    HttpClientModule,     //Module for creating http requests
     BrowserAnimationsModule,
+
+    //HTML angular material libraries for formatting
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
@@ -43,8 +45,11 @@ import {IssueService } from './services/issue.service';
     MatTableModule,
     MatDividerModule,
     MatSnackBarModule,
+
+    //angular library for Forms
     ReactiveFormsModule
   ],
+  //Relevant services
   providers: [IssueService],
   bootstrap: [AppComponent]
 })

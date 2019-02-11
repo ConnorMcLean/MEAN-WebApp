@@ -7,12 +7,11 @@
    </section>
    <mat-divider></mat-divider>
    <br>
+
+   <!-- initialise form with createForm name -->
    <form [formGroup]="createForm" class="create-form">
      <mat-form-field class="field-full-width">
        <input matInput placeholder="Issue Title" formControlName="title" #title>
-       <!--<mat-error *ngIf="createForm.controls['title'].errors.required">
-         Title is <strong>required</strong>
-       </mat-error>-->
      </mat-form-field>
 
      <mat-form-field class="field-full-width">
@@ -23,6 +22,7 @@
        <textarea matInput placeholder="Description" formControlName="description" #description></textarea>
      </mat-form-field>
 
+     <!-- select from specific options for this form input -->
      <mat-form-field>
          <mat-select placeholder="Severity" formControlName="severity" #severity>
            <mat-option value="Low">Low</mat-option>
@@ -33,7 +33,11 @@
 
      <mat-divider></mat-divider>
      <br><br>
+
+    <!-- back button with router link -->
      <button mat-raised-button color="accent" routerLink="/list">Back</button>&nbsp;
+
+     <!-- submit button for addIssue to db -->
      <button type="submit" (click)="addIssue(title.value, responsible.value, description.value, severity.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Save</button>
    </form>
  </mat-card>

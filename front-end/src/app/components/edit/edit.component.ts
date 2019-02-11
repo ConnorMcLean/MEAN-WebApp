@@ -36,6 +36,7 @@ export class EditComponent implements OnInit {
       });
   }
 
+  // On initiliasation fill update form with old values to be edited
   ngOnInit(){
     this.activatedRoute.params.subscribe((params) => {
       this.id = params.id;
@@ -54,6 +55,7 @@ export class EditComponent implements OnInit {
     });
   }
 
+  //on successful update issue show snackbar notification at bottom of screen
   updateIssue(title, responsible, description, severity, status){
     this.issueService.updateIssue(this.id, title, responsible, description, severity, status)
     .subscribe(() => {
