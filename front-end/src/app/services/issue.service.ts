@@ -15,7 +15,7 @@ export class IssueService {
   }
 
   getIssueById(id){
-    return this.client.get(this.uri +  '/issues/${id}');
+    return this.client.get(this.uri +  '/issues/' + id);
   }
 
   addIssue(title, responsible, description, severity){
