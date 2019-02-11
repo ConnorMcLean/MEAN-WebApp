@@ -11,4 +11,4 @@ Web application is an issue tracking app, which allows users to submit issues an
 -MongoDB (Back-end)
 -ExpressJS (Back-end)
 -AngularJS (Front-end)
--NodeJS (Back-nd)
+-NodeJS (Back-end)
